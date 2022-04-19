@@ -30,10 +30,10 @@ class BoardMapperTest {
 	}
 	
 	// detail
-	// @Test
+	@Test
 	void test() throws Exception {
 		BoardVO boardVO = new BoardVO();
-		boardVO.setNum(3L);
+		boardVO.setNum(215L);
 		boardVO = boardMapper.getDetail(boardVO);
 		System.out.println(boardVO.toString());
 		assertNotNull(boardVO);
@@ -106,7 +106,7 @@ class BoardMapperTest {
 	// @Test
 	void fileDetailTest() throws Exception {
 		BoardFilesVO boardFilesVO = new BoardFilesVO();
-		boardFilesVO.setFileNum(5L);
+		boardFilesVO.setFileNum(211L);
 		
 		boardFilesVO = boardMapper.getFileDetail(boardFilesVO);
 		System.out.println(boardFilesVO.toString());

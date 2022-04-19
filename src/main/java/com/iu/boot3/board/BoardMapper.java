@@ -24,6 +24,11 @@ public interface BoardMapper {
 	// delete
 	public int setDelete(BoardVO boardVO) throws Exception;
 	
+	// board table count num
+	public Integer getTotalCount(Pager pager) throws Exception;
+	
+	
+	
 	// file Add
 	public int setFileAdd(BoardFilesVO boardFilesVO) throws Exception;
 	
@@ -34,8 +39,7 @@ public interface BoardMapper {
 	public BoardFilesVO getFileDetail(BoardFilesVO boardFilesVO) throws Exception;
 	
 	// file List
-	public List<BoardFilesVO> getFileList() throws Exception;
+	public List<BoardFilesVO> getFileList(BoardVO boardVO) throws Exception;
 	
-	// board table count num
-	public Integer getTotalCount(Pager pager) throws Exception;
+	
 }

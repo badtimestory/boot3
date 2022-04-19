@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.boot3.util.Pager;
 
@@ -40,11 +41,45 @@ public class BoardController {
 	}
 	
 	@PostMapping("add")
-	public String setAdd(BoardVO boardVO) throws Exception {
+	public String setAdd(BoardVO boardVO, MultipartFile[] files) throws Exception {
 		
-		int result = boardService.setAdd(boardVO);
+//		for(MultipartFile f: files) {
+//			System.out.println(f.getOriginalFilename());
+//		}
+		
+		// 업로드시 파일명을 출력
+		int result = boardService.setAdd(boardVO, files);
 
 		return "redirect:./list";
 	}
-
+	
+	@GetMapping("detail")
+	public String getDetail(Model model, BoardVO boardVO) throws Exception {
+		boardVO = boardService.getDetail(boardVO);
+		model.addAttribute("vo", boardVO);
+		
+		return "board/detail";
+	}
+	
+	@GetMapping("update")
+	public String setUpdate(Model model, BoardVO boardVO) throws Exception {
+		boardVO = boardService.getDetail(boardVO);
+		model.addAttribute("vo", boardVO);
+		
+		return "board/update";
+	}
+	
+	@PostMapping("update")
+	public String setUpdate(BoardVO boardVO) throws Exception {
+		int result = boardService.setUpdate(boardVO);
+		
+		return "redirect:./list";
+	}
+	
+	@GetMapping("delete")
+	public String setDelete(BoardVO boardVO) throws Exception {
+		int result = boardService.setDelete(boardVO);
+		
+		return "redirect:./list";
+	}
 }

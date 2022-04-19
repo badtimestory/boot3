@@ -1,6 +1,7 @@
 package com.iu.boot3.board;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -33,5 +34,7 @@ public class BoardVO {
 	private Long step;
 	private Long depth;
 	private Integer categoty;
+	
+	private List<BoardFilesVO> filesVOs;
 	
 }

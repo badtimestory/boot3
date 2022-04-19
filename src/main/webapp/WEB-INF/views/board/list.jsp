@@ -35,7 +35,7 @@
 					<c:forEach items="${list}" var="vo">
 					<tr>
 						<th scope="row">${vo.num}</th>
-						<th>${vo.title}</th>
+						<th><a href="./detail?num=${vo.num}">${vo.title}</a></th>
 						<th>${vo.contents}</th>
 						<th>${vo.writer}</th>
 						<th>${vo.regDate}</th>
@@ -46,29 +46,30 @@
 			</table>
 		</div>
 		
+		<div class="row justify-content-end">
+			<a href="./add" type="button" class="btn col-1 btn-outline-primary">WRITE</a>
+		</div>
+		
 		<nav aria-label="Page navigation example">
-		  <ul class="pagination">
+		  <ul class="pagination justify-content-center">
 		    <li class="page-item">
-			    <a class="page-link" href="./list?pn=${pager.pre ? startNum-1 : 1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous">
+			    <a class="page-link" href="./list?pn=${pager.pre ? pager.startNum-1 : 1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous">
 	        	<span aria-hidden="true">&laquo;</span>
 	      		</a>
       		</li>
+      		
 		    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 		    	<li class="page-item"><a class="page-link" 
 		    	href="./list?pn=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 		    </c:forEach>
+		    
 		    <li class="page-item">
-			    <a class="page-link" href="./list?pn=${pager.next ? pager.lastNum + 1 : pager.lastNum}&kind=${pager.kind}&search=${pager.search}" aria-label="Next">
+			    <a class="page-link" href="./list?pn=${pager.next ? pager.lastNum+1 : pager.lastNum}&kind=${pager.kind}&search=${pager.search}" aria-label="Next">
 	        	<span aria-hidden="true">&raquo;</span>
 	      		</a>
       		</li>
 		  </ul>
 		</nav>
-		
-		<div class="row justify-content-end">
-			<a href="./add" type="button" class="btn col-1 btn-outline-primary">WRITE</a>
-		</div>
-		
 	</div>
 
 </body>

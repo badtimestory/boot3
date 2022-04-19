@@ -41,14 +41,36 @@
  	</select>
  	
  	<!-- detail Mapper -->
- 	<select id="getDetail" parameterType="BoardVO" resultType="BoardVO">
- 		SELECT * FROM BOARD WHERE NUM = #{num}
+ 	<select id="getDetail" parameterType="BoardVO" resultMap="getDetailResult">
+ 		SELECT B.*, F.*
+		FROM BOARD B
+			LEFT OUTER JOIN
+			BOARDFILES F
+			USING(NUM)
+		WHERE NUM = #{num};
  	</select>
  	
+ 	<resultMap type="BoardVO" id="getDetailResult">
+ 		<id column="num" property="num"/>
+ 		<result column="title" property="title"/>
+ 		<result column="writer" property="writer"/>
+ 		<result column="contents" property="contents"/>
+ 		<result column="hit" property="hit"/>
+ 		<result column="ref" property="ref"/>
+ 		<result column="step" property="step"/>
+ 		<result column="depth" property="depth"/>
+ 		<!-- 1:N -->
+ 		<collection property="filesVOs" javaType="java.util.List" ofType="BoardFilesVO">
+ 			<id column="fileNum" property="fileNum"/>
+ 			<id column="fileName" property="fileName"/>
+ 			<id column="oriName" property="oriName"/>
+ 		</collection>
+ 	</resultMap>
+ 	
  	<!-- insert Mapper -->
- 	<insert id="setAdd" parameterType="BoardVO">
+ 	<insert id="setAdd" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="num">
  		INSERT INTO BOARD (NUM, TITLE, WRITER, CONTENTS, HIT, REGDATE, REF, STEP, DEPTH, CATEGORY)
- 		VALUES (NULL, #{title}, #{writer}, #{contents}, 0, NOW(), 0, 0, 0, 1)
+ 		VALUES (#{num}, #{title}, #{writer}, #{contents}, 0, NOW(), 0, 0, 0, 1)
  	</insert>
  	
  	<!-- update Mapper -->
@@ -75,6 +97,11 @@
  	<!-- detail file Mapper -->
  	<select id="getFileDetail" resultType="BoardFilesVO">
  		SELECT * FROM BOARDFILES WHERE FILENUM = #{fileNum}
+ 	</select>
+ 	
+ 	<!-- file List Mapper -->
+ 	<select id="getFileList" parameterType="BoardVO" resultType="BoardFilesVO">
+ 		SELECT * FROM BOARDFILES WHERE NUM = #{num}
  	</select>
  
  </mapper>

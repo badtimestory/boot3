@@ -52,11 +52,7 @@ public class Pager {
 		return this.pn;
 	}
 	
-	public void makeRow() {
-		// pn : 1, perPage : 10 ==> startRow : 0
-		// pn : 2, perPage : 20 ==> startRow : 10
-		// pn : 3, perPage : 30 ==> startRow : 20
-		
+	public void makeRow() {		
 		this.startRow = (this.getPn()-1) * this.getPerPage();	
 	}
 	
@@ -76,8 +72,8 @@ public class Pager {
 		// 전체 페이지
 		Integer totalPage = totalCount / this.getPerPage();
 		// getPerPage로 나눈 갯수보다 많을 때 하나 더 생성
-		if(totalPage % this.getPerPage() != 0) {
-			++totalPage;
+		if(totalCount % this.getPerPage() != 0) {
+			totalPage++;
 		}
 		
 		// 페이징번호 10개씩 출력
@@ -85,32 +81,34 @@ public class Pager {
 		
 		// 전체 blcok
 		Integer totalBlock = totalPage / perBlock;
-		if(totalPage % totalBlock != 0) {
-			++totalBlock;
+		if(totalPage % perBlock != 0) {
+			totalBlock++;
 		}
 		
 		// 현재 block
 		Integer curBlock = this.getPn() / perBlock;
 		if(this.getPn() % perBlock != 0) {
-			++curBlock;
+			curBlock++;
 		}
 		
 		// startNum
-		this.startNum = ((curBlock-1) * perBlock)+1;
+		this.startNum = (curBlock-1) * perBlock+1;
 		
 		// lastNum
 		this.lastNum = curBlock * perBlock;
 		
 		// previous
-		this.pre = false;
 		if(curBlock > 1) {
 			this.pre = true;
 		}
 		
 		// next
-		this.next = false;
 		if(totalBlock > curBlock) {
 			this.next = true;
+		}
+		
+		if(curBlock == totalBlock) {
+			this.lastNum = totalPage;
 		}
 	}
 }
