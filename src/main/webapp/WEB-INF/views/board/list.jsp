@@ -46,6 +46,25 @@
 			</table>
 		</div>
 		
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+		    <li class="page-item">
+			    <a class="page-link" href="./list?pn=${pager.pre ? startNum-1 : 1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous">
+	        	<span aria-hidden="true">&laquo;</span>
+	      		</a>
+      		</li>
+		    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+		    	<li class="page-item"><a class="page-link" 
+		    	href="./list?pn=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+		    </c:forEach>
+		    <li class="page-item">
+			    <a class="page-link" href="./list?pn=${pager.next ? pager.lastNum + 1 : pager.lastNum}&kind=${pager.kind}&search=${pager.search}" aria-label="Next">
+	        	<span aria-hidden="true">&raquo;</span>
+	      		</a>
+      		</li>
+		  </ul>
+		</nav>
+		
 		<div class="row justify-content-end">
 			<a href="./add" type="button" class="btn col-1 btn-outline-primary">WRITE</a>
 		</div>

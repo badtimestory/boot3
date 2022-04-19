@@ -12,37 +12,38 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 
-		<div class="container mt-4">
+	<div class="container mt-4">
 		<div class="row mt-4">
 			<div class="alert alert-secondary" role="alert">
 				  <h4>${board} WRITE</h4>
 			</div>
 		</div>
-	
-		<div class="row mb-3">
-		    <label class="col-sm-2 col-form-label">TITLE</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control">
-		    </div>
-		</div>
-		
-		<div class="row mb-3">
-		    <label class="col-sm-2 col-form-label">WRITER</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control">
-		    </div>
-		</div>
-	  
-		<div class="row mt-3">
-			<label class="col-sm-2 col-form-label">CONTENTS</label>
-			<div class="col-sm-10">
-				<textarea class="form-control"></textarea>
+		<form action="./add" method="POST">
+			<div class="row mb-3">
+			    <label class="col-sm-2 col-form-label">TITLE</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" name="title">
+			    </div>
 			</div>
-		</div>
-		
-		<div class="row mt-3 justify-content-end">
-			<a href="#" type="button" class="btn col-1 btn-outline-primary">WRITE</a>
-		</div>
+			
+			<div class="row mb-3">
+			    <label class="col-sm-2 col-form-label">WRITER</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" name="writer">
+			    </div>
+			</div>
+		  
+			<div class="row mt-3">
+				<label class="col-sm-2 col-form-label">CONTENTS</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" name="contents"></textarea>
+				</div>
+			</div>
+			
+			<div class="row mt-3 justify-content-end">
+				<button class="btn col-1 btn-outline-primary">WRITE</button>
+			</div>
+		</form>
 	</div>
 </body>
 </html>

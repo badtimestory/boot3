@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.iu.boot3.util.Pager;
@@ -36,6 +37,14 @@ public class BoardController {
 	public String setAdd() throws Exception {
 		
 		return "board/add";
+	}
+	
+	@PostMapping("add")
+	public String setAdd(BoardVO boardVO) throws Exception {
+		
+		int result = boardService.setAdd(boardVO);
+
+		return "redirect:./list";
 	}
 
 }

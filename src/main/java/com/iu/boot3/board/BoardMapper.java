@@ -35,4 +35,7 @@ public interface BoardMapper {
 	
 	// file List
 	public List<BoardFilesVO> getFileList() throws Exception;
+	
+	// board table count num
+	public Integer getTotalCount(Pager pager) throws Exception;
 }

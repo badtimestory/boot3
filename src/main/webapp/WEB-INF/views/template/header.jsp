@@ -32,12 +32,12 @@
 	        </li>
 	      </ul>
 	      <form class="d-flex">
-		    <select id="searchType" name="searchType" class="form-select me-2" aria-label="Default select example">
-				<option value="t">제목</option>
-				<option value="w">글쓴이</option>
-				<option value="c">내용</option>
+		    <select id="kind" name="kind" class="form-select me-2" aria-label="Default select example">
+				<option value="col1">제목</option>
+				<option value="col2">글쓴이</option>
+				<option value="col3">내용</option>
 			</select>
-	        <input class="form-control me-2" id="keyWord" name="keyWord" value="${pager.keyWord}" type="search" aria-label="Search">
+	        <input class="form-control me-2" id="search" name="search" type="search" aria-label="Search">
 	        <button class="btn btn-outline-light" type="submit">Search</button>
 	      </form>
 	    </div>

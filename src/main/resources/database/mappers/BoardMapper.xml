@@ -4,19 +4,39 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
  <mapper namespace="com.iu.boot3.board.BoardMapper">
+ 
+ 	<select id="getTotalCount" resultType="java.lang.Integer" parameterType="Pager">
+ 		SELECT COUNT(NUM) FROM BOARD WHERE
+ 			<choose>
+				<when test="kind == 'col1'">
+					TITLE
+				</when>
+				<when test="kind == 'col2'">
+					CONTENTS
+				</when>
+				<otherwise>
+					WRITER
+				</otherwise>
+			</choose>
+			LIKE CONCAT('%' #{search} '%')
+ 	</select>
  	
  	<!-- list Mapper -->
  	<select id="getList" resultType="BoardVO" parameterType="Pager">
-	 		SELECT * FROM BOARD WHERE NUM > 0 
-	 			<if test="searchType == 't'.toString()">
-	 				AND TITLE LIKE CONCAT('%' #{keyWord} '%') 			
-	 			</if>
-	 			<if test="searchType == 'w'.toString()">
-					AND WRITER LIKE CONCAT('%' #{keyWord} '%')	 			
-	 			</if>
-	 			<if test="searchType == 'c'.toString()">
-					AND CONTENTS LIKE CONCAT('%' #{keyWord} '%')	 			
-	 			</if>
+	 		SELECT * FROM BOARD 
+	 			WHERE NUM > 0 AND
+	 				<choose>
+	 					<when test="kind == 'col1'">
+	 						TITLE
+	 					</when>
+	 					<when test="kind == 'col2'">
+	 						CONTENTS
+	 					</when>
+	 					<otherwise>
+	 						WRITER
+	 					</otherwise>
+	 				</choose>
+	 			LIKE CONCAT('%' #{search} '%')	
 	 		ORDER BY NUM DESC LIMIT #{startRow}, #{perPage} 
  	</select>
  	
