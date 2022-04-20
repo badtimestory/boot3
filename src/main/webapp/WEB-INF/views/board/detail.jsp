@@ -15,7 +15,7 @@
 
 	<div class="container mt-2">
 		<c:forEach items="${vo.filesVOs}" var="f">
-			<a href="#?fileNum=${f.fileNum}">${f.oriName}</a>
+			<a href="./fileDown?fileNum=${f.fileNum}">${f.oriName}</a>
 		</c:forEach>
 	</div>
 		

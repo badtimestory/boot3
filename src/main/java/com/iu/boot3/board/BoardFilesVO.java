@@ -1,11 +1,13 @@
 package com.iu.boot3.board;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.iu.boot3.util.FileVO;
 
-@Getter
-@Setter
-public class BoardFilesVO {
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class BoardFilesVO extends FileVO{
 	
 	/*
 		FILENUM BIGINT AUTO_INCREMENT,
@@ -14,8 +16,6 @@ public class BoardFilesVO {
 		ORINAME VARCHAR(200),
 	*/
 
-	private Long fileNum;
+	// 게시판 글번호
 	private Long num;
-	private String fileName;
-	private String oriName;
 }

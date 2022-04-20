@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.boot3.util.Pager;
 
@@ -81,5 +82,18 @@ public class BoardController {
 		int result = boardService.setDelete(boardVO);
 		
 		return "redirect:./list";
+	}
+	
+	@GetMapping("fileDown")
+	public ModelAndView getFileDown(BoardFilesVO boardFilesVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		boardFilesVO = boardService.getFileDetail(boardFilesVO);
+		
+		// 속성명은 fileDown 클래스에서 사용하는 이름과 동일하게
+		mv.addObject("fileVO", boardFilesVO);
+		// Bean(class)이름과 동일하게
+		mv.setViewName("fileDown");
+		
+		return mv;
 	}
 }

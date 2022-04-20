@@ -77,5 +77,10 @@ public class BoardService {
 		
 		return result;
 	}
+	
+	// file detail
+	public BoardFilesVO getFileDetail(BoardFilesVO boardFilesVO) throws Exception {
+		return boardMapper.getFileDetail(boardFilesVO);
+	}
 
 }
