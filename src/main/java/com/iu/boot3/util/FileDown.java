@@ -55,7 +55,7 @@ public class FileDown extends AbstractView {
 		OutputStream os = response.getOutputStream();
 
 		// 전송
-		// FileCopyUtils.copy(fi, os);
+		FileCopyUtils.copy(fi, os);
 		
 		os.close();
 		fi.close();

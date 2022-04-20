@@ -95,7 +95,7 @@
  	</delete>
  	
  	<!-- detail file Mapper -->
- 	<select id="getFileDetail" resultType="BoardFilesVO">
+ 	<select id="getFileDetail" parameterType="BoardFilesVO" resultType="BoardFilesVO">
  		SELECT * FROM BOARDFILES WHERE FILENUM = #{fileNum}
  	</select>
  	
