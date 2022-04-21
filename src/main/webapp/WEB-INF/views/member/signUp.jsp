@@ -11,46 +11,52 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-
-	<div class="container mt-4">
+		<div class="container mt-4">
 		<div class="row mt-4">
 			<div class="alert alert-secondary" role="alert">
-				  <h4>${board} WRITE</h4>
+				  <h4>SIGN</h4>
 			</div>
 		</div>
-		<form action="./add" method="POST" enctype="multipart/form-data">
+		<form action="./signUp" method="POST" enctype="multipart/form-data">
 			<div class="row mb-3">
-			    <label class="col-sm-2 col-form-label">TITLE</label>
+			    <label class="col-sm-2 col-form-label">ID</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="title">
+			      <input type="text" class="form-control" name="id">
 			    </div>
 			</div>
 			
 			<div class="row mb-3">
-			    <label class="col-sm-2 col-form-label">WRITER</label>
+			    <label class="col-sm-2 col-form-label">PW</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="writer">
+			      <input type="text" class="form-control" name="pw">
 			    </div>
 			</div>
 		  
 			<div class="row mt-3">
-				<label class="col-sm-2 col-form-label">CONTENTS</label>
+				<label class="col-sm-2 col-form-label">NAME</label>
 				<div class="col-sm-10">
-					<textarea class="form-control" name="contents"></textarea>
+					<input type="text" class="form-control" name="name">
 				</div>
 			</div>
 			
 			<div class="row mt-3">
-			    <label class="col-sm-2 col-form-label">FILE1</label>
-			    <div class="col-sm-10">
-			      <input type="file" class="form-control" name="files">
-			    </div>
+				<label class="col-sm-2 col-form-label">PHONE</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="phone">
+				</div>
 			</div>
 			
 			<div class="row mt-3">
-			    <label class="col-sm-2 col-form-label">FILE2</label>
+				<label class="col-sm-2 col-form-label">EMAIL</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="email">
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+			    <label class="col-sm-2 col-form-label">FILE</label>
 			    <div class="col-sm-10">
-			      <input type="file" class="form-control" name="files">
+			      <input type="file" class="form-control" name="file">
 			    </div>
 			</div>
 	

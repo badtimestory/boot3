@@ -12,53 +12,33 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 
-	<div class="container mt-4">
+<div class="container mt-4">
 		<div class="row mt-4">
 			<div class="alert alert-secondary" role="alert">
-				  <h4>${board} WRITE</h4>
+				  <h4>LOGIN</h4>
 			</div>
 		</div>
-		<form action="./add" method="POST" enctype="multipart/form-data">
+		<form action="./login" method="POST" enctype="multipart/form-data">
 			<div class="row mb-3">
-			    <label class="col-sm-2 col-form-label">TITLE</label>
+			    <label class="col-sm-2 col-form-label">ID</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="title">
+			      <input type="text" class="form-control" name="id">
 			    </div>
 			</div>
 			
 			<div class="row mb-3">
-			    <label class="col-sm-2 col-form-label">WRITER</label>
+			    <label class="col-sm-2 col-form-label">PASSWORD</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="writer">
-			    </div>
-			</div>
-		  
-			<div class="row mt-3">
-				<label class="col-sm-2 col-form-label">CONTENTS</label>
-				<div class="col-sm-10">
-					<textarea class="form-control" name="contents"></textarea>
-				</div>
-			</div>
-			
-			<div class="row mt-3">
-			    <label class="col-sm-2 col-form-label">FILE1</label>
-			    <div class="col-sm-10">
-			      <input type="file" class="form-control" name="files">
+			      <input type="text" class="form-control" name="pw">
 			    </div>
 			</div>
 			
-			<div class="row mt-3">
-			    <label class="col-sm-2 col-form-label">FILE2</label>
-			    <div class="col-sm-10">
-			      <input type="file" class="form-control" name="files">
-			    </div>
-			</div>
-	
 			<div class="row mt-3 justify-content-end">
-				<button class="btn col-1 btn-outline-primary">WRITE</button>
+				<button class="btn col-1 btn-outline-primary">로그인</button>
 			</div>
 		</form>
 	</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

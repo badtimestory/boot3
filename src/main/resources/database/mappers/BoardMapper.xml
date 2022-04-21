@@ -100,7 +100,7 @@
  	</select>
  	
  	<!-- file List Mapper -->
- 	<select id="getFileList" parameterType="BoardVO" resultType="BoardFilesVO">
+ 	<select id="getFileList" parameterType="BoardFilesVO" resultType="BoardFilesVO">
  		SELECT * FROM BOARDFILES WHERE NUM = #{num}
  	</select>
  

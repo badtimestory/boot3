@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <header class=container-fluid>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 	  <div class="container-fluid">
@@ -31,6 +32,30 @@
 	          <a class="nav-link disabled">Disabled</a>
 	        </li>
 	      </ul>
+	      
+	      <ul class="navbar-nav me-3 mb-2 mb-lg-0">
+	      		<c:choose>
+	      			<c:when test="${not empty member}">
+			      		<li class="nav-item">
+				          <a class="nav-link" aria-current="page" href="/member/myPage">My Page <i class="bi bi-easel2-fill"></i></a>
+				        </li>
+				        <li class="nav-item">
+				          <a class="nav-link" href="/member/logout">Logout <i class="bi bi-box-arrow-right"></i></a>
+				        </li>
+				    </c:when>
+		 			<c:otherwise>     	
+				      	<li class="nav-item">
+				          <a class="nav-link" aria-current="page" href="/member/signUp">Sign <i class="bi bi-person-plus-fill"></i></a>
+				        </li>
+				        <li class="nav-item">
+				          <a class="nav-link" href="/member/login">Login <i class="bi bi-door-open"></i></a>
+				          
+				        </li>
+			        </c:otherwise>
+		        </c:choose>
+	      </ul>
+	      
+	      
 	      <form class="d-flex">
 		    <select id="kind" name="kind" class="form-select me-2" aria-label="Default select example">
 				<option value="col1">제목</option>
