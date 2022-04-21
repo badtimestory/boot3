@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.iu.boot3.member.MemberMapper">
+ 	
+ 	<!-- 회원가입 Mapper -->
+ 	<insert id="signUp" parameterType="MemberVO">
+ 		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE)
+		VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone});
+ 	</insert>
+ 	
+ 	<!-- 로그인 -->
+ 	<select id="login" resultType="MemberVO">
+ 		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = #{pw};
+ 	</select>
+ 	
+ 	<!-- 회원 정보 -->
+ 	<select id="myPage" parameterType="MemberVO" resultType="MemberVO" resultMap="ResultMyPage">
+ 		SELECT M.NAME, M.EMAIL, M.PHONE, MF.* FROM
+			MEMBER M
+			LEFT JOIN
+			MEMBERFILES MF
+			USING(ID)
+		WHERE ID = #{id}
+ 	</select>
+ 	
+ 	<resultMap type="MemberVO" id="ResultMyPage">
+ 		<id column="id" property="id"/>
+ 		<result column="pw" property="pw"/>
+ 		<result column="name" property="name"/>
+ 		<result column="email" property="email"/>
+ 		<result column="phone" property="phone"/>
+ 		<association property="memberFileVO" javaType="MemberFileVO">
+ 			<id column="fileNum" property="fileNum"></id>
+ 			<result column="fileName" property="fileName"/>
+ 			<result column="oriName" property="oriName"/>
+ 		</association>
+ 	</resultMap>
+ 	
+ 	<!-- 회원 수정 -->
+ 	<update id="memberUpdate" parameterType="MemberVO">
+ 		UPDATE MEMBER SET NAME = #{name}, EMAIL = #{email}, PHONE = #{phone}
+ 		WHERE ID = #{id}
+ 	</update>
+ 	
+ 	<!-- 회원 삭제 -->
+ 	<delete id="memberDelete" parameterType="MemberVO">
+ 		DELETE FROM MEMBER WHERE ID = #{id}
+ 	</delete>
+ 	
+ 	<!-- 파일 상세정보 -->
+ 	<select id="getDetailFile" parameterType="MemberVO" resultType="MemberFileVO">
+ 		SELECT * FROM MEMBERFILES WHERE FILENUM = #{fileNum}
+ 	</select>
+ 	
+ 	<!-- 파일 추가 -->
+ 	<insert id="setAddFile" parameterType="MemberFileVO">
+ 		INSERT INTO MEMBERFILES (FILENUM, ID, FILENAME, ORINAME)
+		VALUES(NULL, #{id}, #{fileName}, #{oriName})
+ 	</insert>
+ 	
+ 	<!-- 파일 삭제 -->
+ 	<delete id="setDeleteFile" parameterType="MemberFileVO">
+ 		DELETE FROM MEMBERFILES WHERE FILENUM = #{fileNum}
+ 	</delete>
+ 	
+ </mapper> 
