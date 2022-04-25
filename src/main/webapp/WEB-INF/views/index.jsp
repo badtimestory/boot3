@@ -40,7 +40,102 @@
 	  </button>
 	</div>
   </div>
+  
+  <div class="container mt-3">
+  	<input type="text" id="d1">
+  	<button type="button" id="btn" class="btn btn-dark">CLICK</button>
+  	<button type="button" id="btn2" class="btn btn-warning">CLICK2</button>
+  	<button type="button" id="btn3" class="btn btn btn-light">CLICK3</button>
+  	  
+  	  <input type="checkbox" name="ch" class="ch" value="1">
+  	  <input type="checkbox" name="ch" class="ch" value="2">
+  	  <input type="checkbox" name="ch" class="ch" value="3">
+  	  <input type="checkbox" name="ch" class="ch" value="4">
+	
+	  <div id="result">
+	  	
+	  </div>
+	</div>
+  
  <!-- Script 호출 -->
 <c:import url="./template/header_script.jsp"></c:import>
+<script type="text/javascript">
+	/*
+	// jquery 기본문법
+	$('#btn').on('click', function(){
+		alert("jquery");
+	});
+	
+	
+	$('#btn2').click(function() {
+		alert("클릭2를 눌렀습니다")
+	});
+	*/
+	
+	/*
+	const ch = document.getElementsByClassName('ch')	// 배열
+	
+	for(c of ch) {
+		c.addEventListener('click', function(){
+			alert(this.value);
+		});
+	}
+	*/
+	
+	/*
+	$('.ch').click(function() {
+		console.log(this.value);
+	});
+	*/
+	
+	/*
+	$('.ch').on({
+		click:function(){
+			console.log('click');
+		},
+		change:function(){
+			console.log('change');
+		}
+	});
+	*/
+	
+	$('.ch').click(function(e){
+		let c = $(this).prop('checked');
+		this.checked
+		console.log(c);
+		$('.ch').prop("checked", true);
+	});
+	
+	$('.ch').change(function(){
+		console.log('change Test');
+	});
+
+	
+	$('#btn').click(function(){
+		let v = $('#d1').val();
+		console.log(v);
+	});
+	
+	$('#btn2').click(function(){
+		$(".ch").each(function(idx, item) {
+			console.log("index : ", idx);
+			console.log("Item : ", item);
+			console.log("value : ", $(item).val());
+		})
+	});
+	
+	$('#btn3').click(function() {
+		// $("#result").append('<input type="checkbox" name="ch" class="ch" value="1">');
+		console.log('btn3 click');
+		
+		let r = "<div>";
+		r = r + '<input type="checkbox" name="ch" class="ch" value="1">';
+		r = r + "</div>";
+		
+		$("#result").append(r);
+		
+	});
+	
+</script>
 </body>
 </html>

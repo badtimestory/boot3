@@ -28,7 +28,7 @@
 			<div class="row mb-3">
 			    <label class="col-sm-2 col-form-label">PW</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="pw">
+			      <input type="password" class="form-control" name="pw">
 			    </div>
 			</div>
 		  
@@ -58,13 +58,58 @@
 			    <div class="col-sm-10">
 			      <input type="file" class="form-control" name="file">
 			    </div>
-			</div>
+			</div> 
 	
 			<div class="row mt-3 justify-content-end">
 				<button class="btn col-1 btn-outline-primary">WRITE</button>
 			</div>
 		</form>
 	</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		<!-- 약관 -->
+		<div class="form-check">
+		  <input id="all" class="form-check-input" type="checkbox" value="">
+		  <label class="form-check-label" for="all">
+		    전체 동의
+		  </label>
+		</div>
+		<div class="form-check">
+		  <input id="check1" class="form-check-input ch" type="checkbox" value="">
+		  <label class="form-check-label" for="check1">
+		    약관 1
+		  </label>
+		</div>
+		<div class="form-check">
+		  <input id="check2" class="form-check-input ch" type="checkbox" value="">
+		  <label class="form-check-label" for="check2">
+		    약관 2
+		  </label>
+		</div>
+		<div class="form-check">
+		  <input id="check3" class="form-check-input ch" type="checkbox" value="">
+		  <label class="form-check-label" for="check3">
+		    약관 3
+		  </label>
+		</div>
+<c:import url="../template/header_script.jsp"></c:import>
+<script type="text/javascript">
+	$('#all').click(function(){
+		$('.ch').prop('checked', $('#all').prop("checked"));
+	});
+	
+	$('.ch').on('click', function(){
+		let check = true;
+		
+		$('.ch').each(function(index, item) {
+			// 변수명
+			if(!$(item).prop('checked')) {
+				check = false;
+			}
+		});
+		
+		$('#all').prop('checked', check);
+		
+	});
+	
+</script>
 </body>
 </html>

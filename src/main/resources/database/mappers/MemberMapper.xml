@@ -52,7 +52,7 @@
  	
  	<!-- 파일 상세정보 -->
  	<select id="getDetailFile" parameterType="MemberVO" resultType="MemberFileVO">
- 		SELECT * FROM MEMBERFILES WHERE FILENUM = #{fileNum}
+ 		SELECT * FROM MEMBERFILES WHERE ID = #{id}
  	</select>
  	
  	<!-- 파일 추가 -->

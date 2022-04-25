@@ -24,7 +24,7 @@ public interface MemberMapper {
 	public int setAddFile(MemberFileVO memberFileVO) throws Exception;
 	
 	// 파일 상세정보
-	public MemberVO getDetailFile(MemberVO memverVO) throws Exception;
+	public MemberFileVO getDetailFile(MemberVO memverVO) throws Exception;
 	
 	// 파일 삭제
 	public int setDeleteFile(MemberFileVO memberFileVO) throws Exception;

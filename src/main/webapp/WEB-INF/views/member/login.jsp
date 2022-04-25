@@ -29,7 +29,7 @@
 			<div class="row mb-3">
 			    <label class="col-sm-2 col-form-label">PASSWORD</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="pw">
+			      <input type="password" class="form-control" name="pw">
 			    </div>
 			</div>
 			

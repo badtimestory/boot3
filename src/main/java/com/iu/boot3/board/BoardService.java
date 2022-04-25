@@ -32,24 +32,23 @@ public class BoardService {
 		int result = boardMapper.setAdd(boardVO);
 //		System.out.println("Insert 후 : " + boardVO.getNum());
 		
-		for (MultipartFile mf : files) {
-			
-			if(mf.isEmpty()) {
-				continue;
+		// file add 눌러서 파일 첨부 안할 때
+		if(files != null) {
+			for (MultipartFile mf : files) {
+				if(mf.isEmpty()) {
+					continue;
+				}
+				// 1. File을 HDD에 저장
+				String fileName = fileManager.fileSave(mf, "resources/upload/board");
+				System.out.println("fileName 확인: " + fileName);
+				// 2. 저장된 정보를 DB에 저장
+				BoardFilesVO boardFilesVO = new BoardFilesVO();
+				boardFilesVO.setNum(boardVO.getNum());
+				boardFilesVO.setFileName(fileName);
+				boardFilesVO.setOriName(mf.getOriginalFilename());
+				boardMapper.setFileAdd(boardFilesVO);	
 			}
-			
-			// 1. File을 HDD에 저장
-			String fileName = fileManager.fileSave(mf, "resources/upload/board");
-			System.out.println("fileName 확인: " + fileName);
-			// 2. 저장된 정보를 DB에 저장
-			BoardFilesVO boardFilesVO = new BoardFilesVO();
-			boardFilesVO.setNum(boardVO.getNum());
-			boardFilesVO.setFileName(fileName);
-			boardFilesVO.setOriName(mf.getOriginalFilename());
-			boardMapper.setFileAdd(boardFilesVO);
-			
 		}
-		
 		return result;
 	}
 	

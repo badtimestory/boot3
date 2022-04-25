@@ -9,14 +9,15 @@
 <c:import url="../template/header.jsp"></c:import>
 <c:import url="../template/header_script.jsp"></c:import>
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
 </head>
 <body>
 
-	<div class="container mt-4">
+<div class="container mt-4">
 		<div class="row mt-4">
 			<div class="alert alert-secondary" role="alert">
 				  <h4>${board} WRITE</h4>
@@ -24,35 +25,35 @@
 		</div>
 		<form action="./add" method="POST" enctype="multipart/form-data">
 			<div class="row mb-3">
-			    <label class="col-sm-2 col-form-label">TITLE</label>
+			    <label class="col-sm-2 col-form-label">NAME</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="title">
+			      <input type="text" class="form-control" name="productName">
 			    </div>
 			</div>
 			
 			<div class="row mb-3">
-			    <label class="col-sm-2 col-form-label">WRITER</label>
+			    <label class="col-sm-2 col-form-label">PRICE</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="writer">
+			      <input type="text" class="form-control" name="productPrice">
+			    </div>
+			</div>
+			
+			<div class="row mb-3">
+			    <label class="col-sm-2 col-form-label">COUNT</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" name="productCount">
 			    </div>
 			</div>
 		  
 			<div class="row mt-3">
 				<label class="col-sm-2 col-form-label">CONTENTS</label>
 				<div class="col-sm-10">
-					<textarea id="summerNote" class="form-control" name="contents"></textarea>
+					<textarea id="summernote" class="form-control" name="productDetail"></textarea>
 				</div>
 			</div>
 			
 			<div id="fileResult">
-			<!--
-			<div class="row mt-3">
-			    <label class="col-sm-2 col-form-label">FILE</label>
-			    <div class="col-sm-10">
-			      <input type="file" class="form-control" name="files">
-			    </div>
-			</div>
-			-->
+			
 			</div>
 			
 			<div class="row mt-3 justify-content-between">
@@ -61,13 +62,15 @@
 			</div>
 		</form>
 	</div>
-<script type="text/javascript">
 
-	//textarea id
-	$('#summerNote').summernote({
-		height: 400
-	});
+
+<script type="text/javascript">
 	
+	// textarea id
+	$('#summernote').summernote({
+		height : 400
+	});
+
 	let count = 0;
 	
 	$('#fileAdd').click(function() {
@@ -93,6 +96,5 @@
 		count--;
 	})
 </script>
-
 </body>
 </html>

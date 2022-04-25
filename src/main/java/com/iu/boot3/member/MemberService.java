@@ -39,7 +39,13 @@ public class MemberService {
 	
 	// 회원탈퇴
 	public int memberDelete(MemberVO memberVO) throws Exception {
-		return memberMapper.memberDelete(memberVO);
+		MemberFileVO memberFileVO = memberMapper.getDetailFile(memberVO);
+		
+		int reuslt = memberMapper.memberDelete(memberVO);
+		
+		boolean fileResult = filemanager.fileDelete(memberFileVO.getFileName(), "/resources/upload/member/");
+		
+		return reuslt;
 	}
 	
 	// 로그인

@@ -15,7 +15,7 @@
 	          <a class="nav-link active" aria-current="page" href="/">Home</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">Link</a>
+	          <a class="nav-link active" href="/product/list">Product</a>
 	        </li>
 	        <li class="nav-item dropdown">
 	          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,18 +37,18 @@
 	      		<c:choose>
 	      			<c:when test="${not empty member}">
 			      		<li class="nav-item">
-				          <a class="nav-link" aria-current="page" href="/member/myPage">My Page <i class="bi bi-easel2-fill"></i></a>
+				          <a class="nav-link active" aria-current="page" href="/member/myPage">My Page <i class="bi bi-easel2-fill"></i></a>
 				        </li>
 				        <li class="nav-item">
-				          <a class="nav-link" href="/member/logout">Logout <i class="bi bi-box-arrow-right"></i></a>
+				          <a class="nav-link active" href="/member/logout">Logout <i class="bi bi-box-arrow-right"></i></a>
 				        </li>
 				    </c:when>
 		 			<c:otherwise>     	
 				      	<li class="nav-item">
-				          <a class="nav-link" aria-current="page" href="/member/signUp">Sign <i class="bi bi-person-plus-fill"></i></a>
+				          <a class="nav-link active" aria-current="page" href="/member/signUp">Sign <i class="bi bi-person-plus-fill"></i></a>
 				        </li>
 				        <li class="nav-item">
-				          <a class="nav-link" href="/member/login">Login <i class="bi bi-door-open"></i></a>
+				          <a class="nav-link active" href="/member/login">Login <i class="bi bi-door-open"></i></a>
 				          
 				        </li>
 			        </c:otherwise>

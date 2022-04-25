@@ -18,6 +18,8 @@
 			<a href="./fileDown?fileNum=${f.fileNum}">${f.oriName}</a>
 		</c:forEach>
 	</div>
+	
+	
 		
 	<div class="container mt-2">
 		<a href="./update?num=${vo.num}" type="button" class="btn btn-success mx-1">수정</a>
