@@ -40,19 +40,12 @@
 			<div class="row mt-3">
 				<label class="col-sm-2 col-form-label">CONTENTS</label>
 				<div class="col-sm-10">
-					<textarea id="summerNote" class="form-control" name="contents"></textarea>
+					<textarea id="contents" class="form-control" name="contents"></textarea>
 				</div>
 			</div>
 			
 			<div id="fileResult">
-			<!--
-			<div class="row mt-3">
-			    <label class="col-sm-2 col-form-label">FILE</label>
-			    <div class="col-sm-10">
-			      <input type="file" class="form-control" name="files">
-			    </div>
-			</div>
-			-->
+			
 			</div>
 			
 			<div class="row mt-3 justify-content-between">
@@ -64,8 +57,42 @@
 <script type="text/javascript">
 
 	//textarea id
-	$('#summerNote').summernote({
-		height: 400
+	$('#contents').summernote({
+		height: 400,
+		placeholder: '내용을 입력하세요',
+		callbacks: {
+			onImageUpload:function(files) {
+				let formData = new FormData();
+				formData.append("files", files[0]);
+				
+				// /board/summerFileUpload
+				$.ajax({
+					type:"POST",
+					url:"./summerFileUpload",
+					processData:false,
+					contentType:false,
+					data:formData,
+					success:function(data) {
+						console.log(data.trim());
+						$('#contents').summernote('editor.insertImage', data.trim());						
+					}
+				});
+			},	// end of onImageUpload
+			onMediaDelete:function(files) {
+				let fileName = $(files[0]).attr('src');
+				console.log(fileName.trim());
+				$.ajax({
+					type:"GET",
+					url:"./summerFileDelete",
+					data: {
+						fileName:fileName
+					},
+					success:function(data) {
+						console.log('삭제확인: ' + data.trim());
+					}
+				})
+			}
+		}
 	});
 	
 	let count = 0;

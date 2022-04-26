@@ -25,7 +25,6 @@
 					<tr>
 						<th scope="col">NUM</th>
 						<th scope="col">TITLE</th>
-						<th scope="col">CONTENTS</th>
 						<th scope="col">WRITER</th>
 						<th scope="col">REGDATE</th>
 						<th scope="col">HIT</th>
@@ -36,7 +35,6 @@
 					<tr>
 						<th scope="row">${vo.num}</th>
 						<th><a href="./detail?num=${vo.num}">${vo.title}</a></th>
-						<th>${vo.contents}</th>
 						<th>${vo.writer}</th>
 						<th>${vo.regDate}</th>
 						<th>${vo.hit}</th>

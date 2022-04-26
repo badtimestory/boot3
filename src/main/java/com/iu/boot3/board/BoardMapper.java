@@ -41,5 +41,4 @@ public interface BoardMapper {
 	// file List
 	public List<BoardFilesVO> getFileList(BoardVO boardVO) throws Exception;
 	
-	
 }

@@ -96,4 +96,27 @@ public class BoardController {
 		
 		return mv;
 	}
+	
+	// 게시판 이미지파일 추가
+	@PostMapping("summerFileUpload")
+	public String setSummerFileUpload(Model model, MultipartFile files) throws Exception {
+		
+		String fileName = boardService.setSummerFileUpload(files);
+		System.out.println(fileName);
+		model.addAttribute("result", fileName);
+		
+		return "common/result";
+	}
+	
+	// 게시판 이미지파일 삭제
+	@GetMapping("summerFileDelete")
+	public String setsummerFileDelete(Model model, String fileName) throws Exception {
+		
+		System.out.println("summernote 게시판 파일이름 확인 : " + fileName);
+		
+		boolean result = boardService.setSummerFileDelete(fileName);
+		model.addAttribute("result", result);
+		
+		return "common/result";
+	}
 }
