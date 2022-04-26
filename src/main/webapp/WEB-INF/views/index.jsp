@@ -42,99 +42,73 @@
   </div>
   
   <div class="container mt-3">
-  	<input type="text" id="d1">
-  	<button type="button" id="btn" class="btn btn-dark">CLICK</button>
-  	<button type="button" id="btn2" class="btn btn-warning">CLICK2</button>
-  	<button type="button" id="btn3" class="btn btn btn-light">CLICK3</button>
-  	  
-  	  <input type="checkbox" name="ch" class="ch" value="1">
-  	  <input type="checkbox" name="ch" class="ch" value="2">
-  	  <input type="checkbox" name="ch" class="ch" value="3">
-  	  <input type="checkbox" name="ch" class="ch" value="4">
-	
-	  <div id="result">
-	  	
-	  </div>
-	</div>
+  	<input type="text" id="v1">
+  	
+  	<input type="checkbox" class="num" name="num" value="a">
+  	<input type="checkbox" class="num" name="num" value="b">
+  	<input type="checkbox" class="num" name="num" value="c">
+  	<input type="checkbox" class="num" name="num" value="d">
+  	
+  	<button id="btn1">GET</button>
+  	<button id="btn2">POST</button>
+  	<button id="btn3">AJAX</button>
+  </div>
   
  <!-- Script 호출 -->
 <c:import url="./template/header_script.jsp"></c:import>
 <script type="text/javascript">
-	/*
-	// jquery 기본문법
-	$('#btn').on('click', function(){
-		alert("jquery");
-	});
 	
-	
-	$('#btn2').click(function() {
-		alert("클릭2를 눌렀습니다")
-	});
-	*/
-	
-	/*
-	const ch = document.getElementsByClassName('ch')	// 배열
-	
-	for(c of ch) {
-		c.addEventListener('click', function(){
-			alert(this.value);
-		});
-	}
-	*/
-	
-	/*
-	$('.ch').click(function() {
-		console.log(this.value);
-	});
-	*/
-	
-	/*
-	$('.ch').on({
-		click:function(){
-			console.log('click');
-		},
-		change:function(){
-			console.log('change');
-		}
-	});
-	*/
-	
-	$('.ch').click(function(e){
-		let c = $(this).prop('checked');
-		this.checked
-		console.log(c);
-		$('.ch').prop("checked", true);
-	});
-	
-	$('.ch').change(function(){
-		console.log('change Test');
-	});
-
-	
-	$('#btn').click(function(){
-		let v = $('#d1').val();
+	$('#btn1').click(function(){
+		let v = $('#v1').val();
 		console.log(v);
+		$.get("./getTest?msg="+v, function(data){
+			console.log("응답 완료");
+			console.log(data.trim());
+		});
 	});
 	
+	// btn2를 click하면 v1의 입력된 값을 /postTest 요청시 parameter로 전송
+	// 응답으로 getResult.jsp를 받기
 	$('#btn2').click(function(){
-		$(".ch").each(function(idx, item) {
-			console.log("index : ", idx);
-			console.log("Item : ", item);
-			console.log("value : ", $(item).val());
-		})
-	});
+		let v = $('#v1').val();
+		console.log(v);
+		$.post("./postTest", {msg:v}, function(event){
+			console.log("응답 완료");
+			console.log(event.trim());
+		});
+	})
 	
-	$('#btn3').click(function() {
-		// $("#result").append('<input type="checkbox" name="ch" class="ch" value="1">');
-		console.log('btn3 click');
+	$('#btn3').click(function(){
+		let ar = [1, 2, 3];
+		let nums = [];
 		
-		let r = "<div>";
-		r = r + '<input type="checkbox" name="ch" class="ch" value="1">';
-		r = r + "</div>";
+		$(".num").each(function(idx, item) {
+			if($(item).prop("checked")) {
+				console.log($(item).val());
+				// 배열 끝에 요소를 추가하고 새로운 길이(length) 반환
+				nums.push($(item).val());
+			}
+		})
 		
-		$("#result").append(r);
-		
-	});
+		let v = $('#v1').val();
+		$.ajax({
+			type : "POST",
+			url : "./arrayTest",
+			traditional: true,
+			data : {
+				msg : v,
+				numbers : ar,
+				// 파라미터 이름 : 파라미터 값
+				nums:nums
+			}, 
+			success : function(d){
+				console.log(d.trim());
+			},
+			error : function(){
+				alert('에러 발생');
+			}
+		});
+	});	
 	
 </script>
 </body>

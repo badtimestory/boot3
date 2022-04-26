@@ -36,15 +36,34 @@ public class ProductController {
 	
 	@GetMapping("add")
 	public String setAdd() throws Exception {
-			
+		
 		return "product/add";
 	}
 	
 	@PostMapping("add")
-	public String setAdd(ProductVO productVO, MultipartFile[] files) throws Exception {
+	public String setAdd(Model model, ProductVO productVO, MultipartFile[] files) throws Exception {
+		
+		for(MultipartFile f: files) {
+			System.out.println("원본파일이름: " + f.getOriginalFilename());
+			System.out.println("파일 크기: " + f.getSize());
+		}
+		
 		int result = productService.setAdd(productVO, files);
 		
-		return "redirect:./list";
+		model.addAttribute("result", result);
+		
+		// 동기형식일 때
+		// return "redirect:./list";
+		return "common/result";
+	}
+	
+	@GetMapping("ajaxList")
+	public String getAjaxList(Model model, Pager pager) throws Exception {
+		List<ProductVO> ar = productService.getList(pager);
+		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
+		
+		return "common/productList";
 	}
 
 }

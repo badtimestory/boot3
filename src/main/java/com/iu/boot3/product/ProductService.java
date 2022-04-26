@@ -54,5 +54,6 @@ public class ProductService {
 	public int setFileAdd(ProductFilesVO productFilesVO) throws Exception {
 		return productMapper.setFileAdd(productFilesVO);
 	}
+	
 
 }
