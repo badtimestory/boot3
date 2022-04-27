@@ -65,5 +65,5 @@
  	<delete id="setDeleteFile" parameterType="MemberFileVO">
  		DELETE FROM MEMBERFILES WHERE FILENUM = #{fileNum}
  	</delete>
- 	
+ 		
  </mapper> 
