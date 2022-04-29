@@ -9,6 +9,7 @@
 					<th>Name</th>
 					<th>Price</th>
 					<th>Count</th>
+					<th>판매여부</th>
 				</tr>
 			</thead>
 		
@@ -19,6 +20,15 @@
 						<td>${vo.productName}</td>
 						<td>${vo.productPrice}</td>
 						<td>${vo.productCount}</td>
+						<td>${vo.sale == '1' ? '판매중' : '판매중지'}</td>
+						<!-- <c:choose>
+							<c:when test="${vo.sale eq 0}">
+								<td>판매중지</td>
+							</c:when>
+							<c:otherwise>
+								<td>판매</td>
+							</c:otherwise>
+						</c:choose> -->
 					</tr>
 				</tbody>
 			</c:forEach>

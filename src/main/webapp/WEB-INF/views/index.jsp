@@ -41,6 +41,14 @@
 	</div>
   </div>
   
+  <div class="container">
+  	<c:if test="${not empty member}">
+  		<c:forEach items="${member.roleVOs}" var="vo">
+	  		<h3>등급 : ${vo.roleName}</h3>  	  		
+  		</c:forEach>
+  	</c:if>
+  </div>
+  
   <div class="container mt-3">
   	<input type="text" id="v1">
   	

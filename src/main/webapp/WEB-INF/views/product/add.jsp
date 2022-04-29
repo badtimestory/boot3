@@ -57,6 +57,22 @@
 				</div>
 			</div>
 			
+			<div class="row mb-3">
+				<div class="form-check">
+				  <input class="form-check-input sale" type="radio" name="sale" id="flexRadioDefault1" value="1">
+				  <label class="form-check-label" for="flexRadioDefault1">
+				    판매
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input sale" type="radio" name="sale" id="flexRadioDefault2" value="0" checked>
+				  <label class="form-check-label" for="flexRadioDefault2">
+				    판매중지
+				  </label>
+				</div>
+			</div>
+			
+	
 			<div id="fileResult">
 			
 			</div>
@@ -71,7 +87,7 @@
 
 <script type="text/javascript">
 	
-	// textarea id
+	// textarea id 호출
 	$('#productDetail').summernote({
 		height : 400
 	});
@@ -122,6 +138,14 @@
 		let productPrice = $('#productPrice').val();
 		let productCount = $('#productCount').val();
 		let productDetail = $('#productDetail').summernote("code"); //$('#productDetail').val();
+		
+		let sale = 0;
+		$('.sale').each(function(idx, item){
+			if($(item).prop("checked")) {
+				sale = $(item).val();
+			}
+		});
+		
 		$('.files').each(function(idx, item) {
 			if(item.files.length > 0) {				
 			console.log("index : " + idx);		// index 번호
@@ -139,6 +163,7 @@
 		formData.append("productPrice", productPrice);
 		formData.append("productCount", productCount);
 		formData.append("productDetail", productDetail);
+		formData.append("sale", sale);
 		
 		$.ajax({
 			type:"POST",

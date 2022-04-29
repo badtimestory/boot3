@@ -32,5 +32,7 @@ public class MemberVO {
 	
 	// 첨부파일
 	private MemberFileVO memberFileVO;
+	
+	private List<RoleVO> roleVOs;
 
 }

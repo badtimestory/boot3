@@ -1,6 +1,10 @@
 package com.iu.boot3.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,10 +18,21 @@ public class MemberService {
 	@Autowired
 	private Filemanager filemanager;
 	
+	// properties 파일의 member.role.member 속성값 반환
+	@Value("${member.role.member}")
+	private String memberRole;
+	
 	// 회원가입
 	public int signUp(MemberVO memberVO, MultipartFile file) throws Exception {
 		
 		int result = memberMapper.signUp(memberVO);
+		
+		// memberrole table insert
+		Map<String, String> map = new HashMap<>();
+		map.put("id", memberVO.getId());
+		map.put("roleName", memberRole);
+		
+		result = memberMapper.setRoleAdd(map);
 		
 		if(!file.isEmpty()) {
 			String fileName = filemanager.fileSave(file, "resources/upload/member/");

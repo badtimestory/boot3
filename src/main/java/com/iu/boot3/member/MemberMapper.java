@@ -1,5 +1,7 @@
 package com.iu.boot3.member;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -28,6 +30,9 @@ public interface MemberMapper {
 	
 	// 파일 삭제
 	public int setDeleteFile(MemberFileVO memberFileVO) throws Exception;
+	
+	// Role
+	public int setRoleAdd(Map<String, String> map) throws Exception;
 	
 	
 }

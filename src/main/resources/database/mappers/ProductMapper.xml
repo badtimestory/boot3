@@ -13,7 +13,27 @@
  				SELECT 
  				* 
  				FROM PRODUCT 
- 				WHERE PRODUCTNUM > 0 
+ 				WHERE PRODUCTNUM > 0
+ 				
+ 				<choose>
+ 					<when test="id != null">
+ 						AND ID = #{id}
+ 					</when>
+ 					<!-- 고객들은 판매하는 제품만 리스트에 출력-->
+ 					<otherwise>
+ 						AND SALE = 1
+ 					</otherwise>
+ 				</choose>
+ 				AND
+ 				<choose>
+					<when test="kind == 'col1'">
+						PRODUCTNAME
+					</when>
+					<otherwise>
+						PRODUCTDETAIL
+					</otherwise>
+				</choose>
+				LIKE CONCAT('%',#{search},'%')
  				ORDER BY PRODUCTNUM DESC
  				LIMIT #{startRow}, #{perPage}
  			) P
@@ -28,24 +48,64 @@
  		<result column="productPrice" property="productPrice"/>
  		<result column="productCount" property="productCount"/>
  		<result column="productDetail" property="productDetail"/>
+ 		<result column="id" property="id"/>
+ 		<result column="sale" property="sale"/>
  		<collection property="productFilesVO" javaType="java.util.List" ofType="productFilesVO">
-	 		<id column="" property=""/>
-	 		<result column="fileNum" property="fileNum"/>
+	 		<id column="fileNum" property="fileNum"/>
 	 		<result column="fileName" property="fileName"/>
 	 		<result column="oriName" property="oriName"/>
  		</collection>
- 	
  	</resultMap>
+ 	
  	
  	<!-- 리스트 전체 갯수 -->
  	<select id="getTotalCount" resultType="java.lang.Integer" parameterType="Pager">
- 		SELECT COUNT(PRODUCTNUM) FROM PRODUCT
+ 		SELECT COUNT(PRODUCTNUM) FROM PRODUCT WHERE PRODUCTNUM > 0
+ 		<if test="id != null">
+ 				AND ID = #{id}
+ 		</if>
+ 		AND
+ 		<choose>
+				<when test="kind == 'col1'">
+					PRODUCTNAME
+				</when>
+				<otherwise>
+					PRODUCTDETAIL
+				</otherwise>
+			</choose>
+			LIKE CONCAT('%',#{search},'%')
  	</select>
+ 	
+ 	<!-- detail Mapper -->
+ 	<select id="getDetail" resultType="ProductVO">
+	 	SELECT P.*, PF.* FROM
+		PRODUCT P
+		LEFT OUTER JOIN
+		PRODUCTFILES PF
+		ON P.PRODUCTNUM = PF.PRODUCTNUM
+		WHERE SALE = 1;
+	</select>
+	
+<!-- <resultMap type="ProductVO" id="getDetailResult">
+		<id column="PRODUCTNUM" property="productNum"></id>
+		<result column="PRODUCTNAME" property="productName"/>
+		<result column="PRODUCTPRICE" property="productPrice"/>
+		<result column="PRODUCTCOUNT" property="productCount"/>
+		<result column="PRODUCTDETAIL" property="productDetail"/>
+			<collection property="productFilesVO" javaType="java.util.List" ofType="productFilesVO">
+				<id column="FILENUM" property="fileNum"/>
+				<result column="PRODUCTNUM" property="productNum"/>
+				<result column="FILENAME" property="fileName"/>
+				<result column="ORINAME" property="oriName"/>
+			</collection>
+	</resultMap>
+-->
  	
  	<!-- 제품 추가 Mapper -->
  	<insert id="setAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
- 		INSERT INTO PRODUCT (PRODUCTNUM, PRODUCTNAME, PRODUCTPRICE, PRODUCTCOUNT, PRODUCTDETAIL)
- 		VALUES (#{productNum}, #{productName}, #{productPrice}, #{productCount}, #{productDetail})
+ 		INSERT INTO PRODUCT (PRODUCTNUM, PRODUCTNAME, PRODUCTPRICE, PRODUCTCOUNT, PRODUCTDETAIL, ID, SALE)
+ 		VALUES (#{productNum}, #{productName}, #{productPrice}, #{productCount}, #{productDetail}, 
+ 		#{id}, #{sale})
  	</insert>
  	
  	<!-- 파일 추가 Mapper -->

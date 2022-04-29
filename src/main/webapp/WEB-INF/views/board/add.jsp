@@ -33,7 +33,7 @@
 			<div class="row mb-3">
 			    <label class="col-sm-2 col-form-label">WRITER</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="writer">
+			      <input type="text" class="form-control" name="writer" readonly="readonly" value="${member.id}">
 			    </div>
 			</div>
 		  

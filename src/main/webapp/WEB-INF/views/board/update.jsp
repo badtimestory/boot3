@@ -17,7 +17,7 @@
 				  <h4>${board} Update</h4>
 			</div>
 		</div>
-		<form action="./add" method="POST" enctype="multipart/form-data">
+		<form action="./update" method="POST" enctype="multipart/form-data">
 			<div class="row mb-3">
 			    <label class="col-sm-2 col-form-label">TITLE</label>
 			    <div class="col-sm-10">

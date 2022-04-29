@@ -43,7 +43,7 @@ public class MemberController {
 		
 			model.addAttribute("vo", memberVO);
 			
-			return "redircet:/";
+			return "redirect:../";
 	}
 	
 	@GetMapping("login")
