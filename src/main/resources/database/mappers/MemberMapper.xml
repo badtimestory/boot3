@@ -40,6 +40,11 @@
  		</collection>
  	</resultMap>
  	
+ 	<!-- 아이디 찾기 -->
+ 	<select id="getFindId" parameterType="MemberVO" resultType="MemberVO">
+ 		SELECT ID FROM MEMBER WHERE EMAIL = #{email}
+ 	</select>
+ 	
  	<!-- 회원 정보 -->
  	<select id="myPage" parameterType="MemberVO" resultType="MemberVO" resultMap="ResultMyPage">
  		SELECT M.NAME, M.EMAIL, M.PHONE, MF.* FROM

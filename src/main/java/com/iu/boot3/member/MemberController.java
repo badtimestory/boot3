@@ -47,8 +47,8 @@ public class MemberController {
 	}
 	
 	@GetMapping("login")
-	public String login() throws Exception {
-		
+	public String login(Model model) throws Exception {
+		model.addAttribute("vo", new MemberVO());
 		return "member/login";
 	}
 	
@@ -107,7 +107,21 @@ public class MemberController {
 		session.invalidate();
 			
 		return "redirect:../";
+	}
+	
+	// 아이디 찾기
+	@GetMapping("findId")
+	public String getFindId() throws Exception {
 		
+		return "member/findId";
+	}
+	
+	@PostMapping("findId")
+	public String getFindId(Model model, MemberVO memberVO) throws Exception {
+		memberVO = memberService.getFindId(memberVO);
+		model.addAttribute("idResult", memberVO);
+		
+		return "member/findIdResult";
 	}
 	
 }

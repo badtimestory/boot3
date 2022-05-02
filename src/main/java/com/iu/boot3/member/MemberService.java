@@ -72,4 +72,9 @@ public class MemberService {
 	public MemberVO myPage(MemberVO memberVO) throws Exception {
 		return memberMapper.myPage(memberVO);
 	}
+	
+	// 아이디 찾기
+	public MemberVO getFindId(MemberVO memberVO) throws Exception {
+		return memberMapper.getFindId(memberVO);
+	}
 }

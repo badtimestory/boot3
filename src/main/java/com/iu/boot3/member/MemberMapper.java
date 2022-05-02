@@ -22,6 +22,9 @@ public interface MemberMapper {
 	// 회원탈퇴
 	public int memberDelete(MemberVO memberVO) throws Exception;
 	
+	// 아이디 찾기
+	public MemberVO getFindId(MemberVO memberVO) throws Exception; 
+	
 	// 파일 추가
 	public int setAddFile(MemberFileVO memberFileVO) throws Exception;
 	
