@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.boot3.member.MemberVO;
 import com.iu.boot3.util.Pager;
@@ -37,21 +38,22 @@ public class ProductController {
 		return "product/list";
 	}
 	
+	// 모든 구매자가 보는 페이지
 	@GetMapping("detail")
-	public String getDetail(Model model, ProductVO productVO, Pager pager) throws Exception {
+	public String getDetail(Model model, ProductVO productVO) throws Exception {
 		// parameter는 productNum
-		// 모든 구매자가 보는 페이지
 		productVO = productService.getDetail(productVO);
 		model.addAttribute("vo", productVO);
-		model.addAttribute("pager", pager);
 		
 		return "product/detail";
 	}
 	
-	@GetMapping("manageDetial")
+	// 모든 판매자가 보는 페이지
+	@GetMapping("manageDetail")
 	public String getManageDetail(Model model, ProductVO productVO) throws Exception {
 		// parameter는 productNum
-		// 모든 판매자가 보는 페이지
+		productVO = productService.getDetail(productVO);
+		model.addAttribute("vo", productVO);
 		
 		return "product/manageDetail";
 	}
@@ -68,12 +70,7 @@ public class ProductController {
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		productVO.setId(memberVO.getId());
-		
-		for(MultipartFile f: files) {
-			System.out.println("원본파일이름: " + f.getOriginalFilename());
-			System.out.println("파일 크기: " + f.getSize());
-		}
-		
+				
 		int result = productService.setAdd(productVO, files);
 		
 		model.addAttribute("result", result);
@@ -108,6 +105,42 @@ public class ProductController {
 		
 		
 		return "product/manage";
+	}
+	
+	@GetMapping("update")
+	public String setUpdate(Model model, ProductVO productVO) throws Exception {
+		productVO = productService.getDetail(productVO);
+		model.addAttribute("vo", productVO);
+				
+		return "product/update";
+	}
+	
+	@PostMapping("update")
+	public ModelAndView setUpdate(Model model, ProductVO productVO, MultipartFile[] files) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		int result = productService.setUpdate(productVO, files);
+		
+		if(result > 0) {
+			mv.setViewName("redirect:./manage");
+		} else {
+			mv.setViewName("common/getResult");
+			mv.addObject("msg", "Update Fail");
+			mv.addObject("path", "./manageDetail?productNum="+productVO.getProductNum());
+		}
+		return mv;
+	}
+	
+	// 파일 삭제
+	@PostMapping("fileDelete")
+	public String setFileDelete(Model model, ProductFilesVO productFilesVO) throws Exception {
+		
+		int result = productService.setFileDelete(productFilesVO);
+		
+		model.addAttribute("result", result);
+		
+		return "common/result";
 	}
 
 }

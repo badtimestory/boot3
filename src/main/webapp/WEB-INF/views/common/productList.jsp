@@ -17,7 +17,7 @@
 				<tbody>
 					<tr>
 						<th scope="row">${vo.productNum}</th>
-						<td>${vo.productName}</td>
+						<td class="detail" data-num="${vo.productNum}">${vo.productName}</td>
 						<td>${vo.productPrice}</td>
 						<td>${vo.productCount}</td>
 						<td>${vo.sale == '1' ? '판매중' : '판매중지'}</td>

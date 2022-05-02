@@ -9,8 +9,6 @@
 <c:import url="../template/header.jsp"></c:import>
 <c:import url="../template/header_script.jsp"></c:import>
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
-
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
@@ -18,6 +16,7 @@
 <body>
 
 <div class="container mt-4">
+	
 		<div class="row mt-4">
 			<div class="alert alert-secondary" role="alert">
 				  <h4>${board} WRITE</h4>
@@ -81,32 +80,16 @@
 				<button id="fileAdd" type="button" class="btn col-2 btn-secondary">FILE ADD</button>
 				<button id="add" class="btn col-2 btn-outline-primary">WRITE</button>
 			</div>
-		
 	</div>
-
-
+</body>
+<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
+<script type="text/javascript" src="../js/summernote.js"></script>
 <script type="text/javascript">
+	summernoteInit('productDetail', '');
+	fileAddInit(${vo.productFilesVO.size()});
+	fileDeleteInit();
 	
-	// textarea id 호출
-	$('#productDetail').summernote({
-		height : 400
-	});
-
-	let count = 0;
-	
-	$('#fileAdd').click(function() {
-		if(count > 4) {
-			alert('파일은 최대 5개까지 첨부가능합니다.');
-			return;
-		}
-		
-		let result = '<div class="mt-3 input-group">';
-		result = result + '<input name="files" type="file" class="form-control files" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">'
-		result = result + '<button class="btn btn-outline-secondary del" type="button" id="inputGroupFileAddon04">X</button>'
-		result = result + '</div>';
-		$('#fileResult').append(result);
-		count++;
-	});
+	getList(1);
 	
 		// list ajax url : ajaxList, Get
 		function getList(pn) {
@@ -124,14 +107,8 @@
 				}
 			});
 		}
-	
-	// FileResult 안에 del을 click 했을 때
-	$('#fileResult').on('click', ".del", function(){
-		$(this).parent().parent().remove();
-		count--;
-	});
-	
-	// 상품등록 ajax
+		
+	// 상품등록(add) ajax
 	$('#add').click(function() {
 		let formData = new FormData();
 		let productName = $('#productName').val();
@@ -211,9 +188,5 @@
 			alert("마지막 페이지 입니다.");
 		}
 	});
-	
-	getList(1);
-
 </script>
-</body>
 </html>

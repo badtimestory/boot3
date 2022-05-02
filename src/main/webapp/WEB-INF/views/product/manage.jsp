@@ -11,11 +11,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <c:import url="../template/header.jsp"></c:import>
 <title>Insert title here</title>
+<style type="text/css">
+	.detail{
+		cursor: pointer;	
+	}
+</style>
 </head>
 <body>
 
 	<div class="container">
-		
 		<div class="row mt-3">
 			<c:import url="../common/productList.jsp"></c:import>
 			<form action="./manage" id="frm">
@@ -37,6 +41,12 @@
 		let pn = $(this).attr("pn");
 		$('#pn').val(pn);
 		$('#frm').submit();
-	})
+	});
+	
+	$('.detail').click(function() {
+		let num = $(this).attr("data-num");
+		location.href="./manageDetail?productNum="+num;
+	});
+	
 </script>
 </html>

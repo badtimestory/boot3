@@ -5,8 +5,8 @@
     
  <mapper namespace="com.iu.boot3.product.ProductMapper">
  	
- 	<!-- 리스트 출력 Mapper -->
- 	<select id="getList" resultMap="getListResult" parameterType="Pager" >
+ 	<!-- 리스트 출력 -->
+ 	<select id="getList" resultMap="listResult" parameterType="Pager" >
  		SELECT P.*, F.* 
  		FROM 
  			(
@@ -42,7 +42,7 @@
  			USING (PRODUCTNUM)
  	</select>
  	
- 	<resultMap type="productVO" id="getListResult">
+ 	<resultMap type="productVO" id="listResult">
  		<id column="productNum" property="productNum"/>
  		<result column="productName" property="productName"/>
  		<result column="productPrice" property="productPrice"/>
@@ -76,44 +76,47 @@
 			LIKE CONCAT('%',#{search},'%')
  	</select>
  	
- 	<!-- detail Mapper -->
- 	<select id="getDetail" resultType="ProductVO">
-	 	SELECT P.*, PF.* FROM
-		PRODUCT P
+ 	<!-- detail -->
+ 	<select id="getDetail" parameterType="ProductVO" resultMap="listResult">
+	 	SELECT P.*, PF.*
+	 	FROM PRODUCT P
 		LEFT OUTER JOIN
 		PRODUCTFILES PF
-		ON P.PRODUCTNUM = PF.PRODUCTNUM
-		WHERE SALE = 1;
+		USING (PRODUCTNUM)
+		WHERE PRODUCTNUM = #{productNum};
 	</select>
 	
-<!-- <resultMap type="ProductVO" id="getDetailResult">
-		<id column="PRODUCTNUM" property="productNum"></id>
-		<result column="PRODUCTNAME" property="productName"/>
-		<result column="PRODUCTPRICE" property="productPrice"/>
-		<result column="PRODUCTCOUNT" property="productCount"/>
-		<result column="PRODUCTDETAIL" property="productDetail"/>
-			<collection property="productFilesVO" javaType="java.util.List" ofType="productFilesVO">
-				<id column="FILENUM" property="fileNum"/>
-				<result column="PRODUCTNUM" property="productNum"/>
-				<result column="FILENAME" property="fileName"/>
-				<result column="ORINAME" property="oriName"/>
-			</collection>
-	</resultMap>
--->
- 	
- 	<!-- 제품 추가 Mapper -->
+ 	<!-- 제품 추가 -->
  	<insert id="setAdd" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
  		INSERT INTO PRODUCT (PRODUCTNUM, PRODUCTNAME, PRODUCTPRICE, PRODUCTCOUNT, PRODUCTDETAIL, ID, SALE)
  		VALUES (#{productNum}, #{productName}, #{productPrice}, #{productCount}, #{productDetail}, 
  		#{id}, #{sale})
  	</insert>
  	
- 	<!-- 파일 추가 Mapper -->
+ 	<update id="setUpdate" parameterType="ProductVO">
+ 		UPDATE PRODUCT SET 
+	 		PRODUCTNAME = #{productName},
+	 		PRODUCTPRICE = ${productPrice},
+	 		PRODUCTCOUNT = #{productCount},
+	 		PRODUCTDETAIL = #{productDetail}
+ 		WHERE 
+ 			PRODUCTNUM = #{productNum}
+ 	</update>
+ 	
+ 	<!-- 파일 추가 -->
  	<insert id="setFileAdd" parameterType="ProductFilesVO">
  		INSERT INTO PRODUCTFILES (FILENUM, PRODUCTNUM, FILENAME, ORINAME)
  		VALUES (NULL, #{productNum}, #{fileName}, #{oriName})
  	</insert>
  	
+ 	<!-- 파일 상세정보 -->
+ 	<select id="getFileDetail" parameterType="ProductFilesVO" resultType="ProductFilesVO">
+ 		SELECT * FROM PRODUCTFILES WHERE FILENUM = #{fileNum}
+ 	</select>
  	
- 
+ 	<!-- 파일 삭제 -->
+ 	<delete id="setFileDelete" parameterType="ProductFilesVO">
+ 		DELETE FROM PRODUCTFILES WHERE FILENUM = #{fileNum}
+ 	</delete>
+ 	
  </mapper> 

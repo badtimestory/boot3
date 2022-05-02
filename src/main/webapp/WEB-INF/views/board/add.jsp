@@ -54,71 +54,13 @@
 			</div>
 		</form>
 	</div>
+<script src="../resources/js/fileAdd.js"></script>
+<script src="../js/summernote.js"></script>
 <script type="text/javascript">
 
-	//textarea id
-	$('#contents').summernote({
-		height: 400,
-		placeholder: '내용을 입력하세요',
-		callbacks: {
-			onImageUpload:function(files) {
-				let formData = new FormData();
-				formData.append("files", files[0]);
-				
-				// /board/summerFileUpload
-				$.ajax({
-					type:"POST",
-					url:"./summerFileUpload",
-					processData:false,
-					contentType:false,
-					data:formData,
-					success:function(data) {
-						console.log(data.trim());
-						$('#contents').summernote('editor.insertImage', data.trim());						
-					}
-				});
-			},	// end of onImageUpload
-			onMediaDelete:function(files) {
-				let fileName = $(files[0]).attr('src');
-				console.log(fileName.trim());
-				$.ajax({
-					type:"GET",
-					url:"./summerFileDelete",
-					data: {
-						fileName:fileName
-					},
-					success:function(data) {
-						console.log('삭제확인: ' + data.trim());
-					}
-				})
-			}
-		}
-	});
+	summernoteInit('contents', '');
 	
-	let count = 0;
 	
-	$('#fileAdd').click(function() {
-		if(count > 4) {
-			alert('파일은 최대 5개까지 첨부가능합니다.');
-			return;
-		}
-		
-		let result = '<div class="input-group mt-3">';
-		result = result + '<label class="col-sm-1 col-form-label">FILE</label>';
-		result = result + '<div class="col-sm-10">';
-		result = result + '<input type="file" class="form-control" name="files">';
-		result = result + '<button class="btn btn-outline-secondary del" type="button" id="button-addon2">X</button>'
-		result = result + '</div>';
-		result = result + '</div>';
-		$('#fileResult').append(result);
-		count++;
-	});
-	
-	// FileResult 안에 del을 click 했을 때
-	$('#fileResult').on('click', ".del", function(){
-		$(this).parent().parent().remove();
-		count--;
-	})
 </script>
 
 </body>

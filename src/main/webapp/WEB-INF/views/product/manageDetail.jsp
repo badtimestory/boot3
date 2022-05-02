@@ -4,23 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<c:import url="../template/header.jsp"></c:import>
 <title>Insert title here</title>
 </head>
 <body>
-<c:import url="../template/header.jsp"></c:import>
-	<h1>${board} Detail Page</h1>
-	
+	<h1>manageDetail Page</h1>
 	<c:import url="./temp_detail.jsp"></c:import>
-	
+
 	<div class="container my-4">
 		<div class="col-2 d-flex">
-			<a href="update?productNum=${vo.productNum}" role="button" class="btn btn-success mx-1">Update</a>
-			<a href="delete?productNum=${vo.productNum}" role="button" class="btn btn-danger mx-1">Delete</a>
+			<a href="./update?productNum=${vo.productNum}" role="button" class="btn btn-success mx-1">Update</a>
 		</div>
 	</div>
 
-<c:import url="../template/header_script.jsp"></c:import>	
+<c:import url="../template/header_script.jsp"></c:import>
+
 </body>
 </html>
