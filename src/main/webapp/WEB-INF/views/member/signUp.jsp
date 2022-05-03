@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,39 +18,62 @@
 				  <h4>SIGN</h4>
 			</div>
 		</div>
-		<form action="./signUp" method="POST" enctype="multipart/form-data">
+		<form:form modelAttribute="memberVO" method="POST" enctype="multipart/form-data">
 			<div class="row mb-3">
 			    <label class="col-sm-2 col-form-label">ID</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="id">
+			    	<form:input id="id" path="id" cssClass="form-control"/>
+				    <div>
+				    	<form:errors path="id"></form:errors>
+				    </div>
 			    </div>
 			</div>
 			
 			<div class="row mb-3">
 			    <label class="col-sm-2 col-form-label">PW</label>
 			    <div class="col-sm-10">
-			      <input type="password" class="form-control" name="pw">
+			    	<form:password id="pw" path="pw" cssClass="form-control"/>
+				    <div>
+				    	<form:errors path="pw"></form:errors>
+				    </div>
+			    </div>
+			</div>
+			
+			<div class="row mb-3">
+			    <label class="col-sm-2 col-form-label">PW 확인</label>
+			    <div class="col-sm-10">
+			    	<!-- <input type="text" class="form-control">  -->
+			    	<form:password id="checkPw" path="checkPw" cssClass="form-control"/>
+			    </div>
+			    <div>
+			    	<form:errors path="checkPw"></form:errors>
 			    </div>
 			</div>
 		  
 			<div class="row mt-3">
 				<label class="col-sm-2 col-form-label">NAME</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="name">
+					<form:input id="name" path="name" cssClass="form-control"/>
+					<div>
+						<form:errors path="name"></form:errors>
+					</div>
 				</div>
 			</div>
 			
 			<div class="row mt-3">
 				<label class="col-sm-2 col-form-label">PHONE</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="phone">
+					<form:input id="phone" path="phone" cssClass="form-control"/>
 				</div>
 			</div>
 			
 			<div class="row mt-3">
 				<label class="col-sm-2 col-form-label">EMAIL</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="email">
+					<form:input id="email" path="email" cssClass="form-control"/>
+					<div>
+						<form:errors path="email"></form:errors>
+					</div>
 				</div>
 			</div>
 			
@@ -63,8 +87,7 @@
 			<div class="row mt-3 justify-content-end">
 				<button class="btn col-1 btn-outline-primary">WRITE</button>
 			</div>
-		</form>
-	</div>
+		</form:form>
 		<!-- 약관 -->
 		<div class="form-check">
 		  <input id="all" class="form-check-input" type="checkbox" value="">
@@ -90,6 +113,7 @@
 		    약관 3
 		  </label>
 		</div>
+	</div>
 <c:import url="../template/header_script.jsp"></c:import>
 <script type="text/javascript">
 	$('#all').click(function(){

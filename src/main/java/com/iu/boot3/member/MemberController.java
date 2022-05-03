@@ -4,11 +4,13 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,15 +32,23 @@ public class MemberController {
 	}
 	
 	@GetMapping("signUp")
-	public String signUp(Model model, MemberVO memberVO) throws Exception {
-		
-		model.addAttribute("vo", memberVO);
-		
+	public String signUp(Model model, @ModelAttribute MemberVO memberVO) throws Exception {
+				
 		return "member/signUp";
 	}
 	
 	@PostMapping("signUp")
-	public String signUp(Model model, MemberVO memberVO, MultipartFile file) throws Exception {
+	public String signUp(Model model, MultipartFile file, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+			
+//			if(bindingResult.hasErrors()) {
+//				return "member/signUp";
+//			}
+		
+		// 사용자 정의 검증 메서드 호출
+		if(memberService.memberError(memberVO, bindingResult)) {
+			return "member/signUp";
+		}
+		
 			int result = memberService.signUp(memberVO, file);
 		
 			model.addAttribute("vo", memberVO);
@@ -47,13 +57,14 @@ public class MemberController {
 	}
 	
 	@GetMapping("login")
-	public String login(Model model) throws Exception {
-		model.addAttribute("vo", new MemberVO());
+	public String login(@ModelAttribute MemberVO memberVO) throws Exception {
+
 		return "member/login";
 	}
 	
 	@PostMapping("login")
-	public String login(HttpSession session, MemberVO memberVO) throws Exception {
+	public String login(HttpSession session, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+				
 		memberVO = memberService.login(memberVO);
 		String viewPath = "member/login";
 		

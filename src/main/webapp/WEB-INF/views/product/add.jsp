@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,44 +28,59 @@
 			<!-- 상품 리스트 ajax로 num, name, price, count-->
 								
 			</div>
-		
+			
+			<form:form modelAttribute="productVO" method="POST" enctype="multipart/form-data">
 			<div class="row mb-3">
 			    <label class="col-sm-2 col-form-label">NAME</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="productName" name="productName">
+			      <form:input id="productName" path="productName" cssClass="form-control"/>
+			      <div>
+			      	<form:errors path="productName"></form:errors>
+			      </div>
 			    </div>
 			</div>
 			
 			<div class="row mb-3">
 			    <label class="col-sm-2 col-form-label">PRICE</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="productPrice" name="productPrice">
+			      <form:input id="productPrice" path="productPrice" cssClass="form-control"/>
+			      <div>
+			      	<form:errors path="productPrice"></form:errors>
+			      </div>
 			    </div>
 			</div>
 			
 			<div class="row mb-3">
 			    <label class="col-sm-2 col-form-label">COUNT</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="productCount" name="productCount">
+			      <form:input id="productCount" path="productCount" cssClass="form-control"/>
+			      <div>
+			      	<form:errors path="productCount"></form:errors>
+			      </div>
 			    </div>
 			</div>
 		  
 			<div class="row mt-3">
 				<label class="col-sm-2 col-form-label">CONTENTS</label>
 				<div class="col-sm-10">
-					<textarea id="productDetail" class="form-control" name="productDetail"></textarea>
+					<form:textarea id="productDetail" path="productDetail" cssClass="form-control"/>
 				</div>
+				<div>
+			      	<form:errors path="productDetail"></form:errors>
+			    </div>
 			</div>
 			
 			<div class="row mb-3">
 				<div class="form-check">
-				  <input class="form-check-input sale" type="radio" name="sale" id="flexRadioDefault1" value="1">
+				  <!-- <input class="form-check-input sale" type="radio" name="sale" id="flexRadioDefault1" value="1">  -->
+				  <form:radiobutton id="flexRadioDefault1" path="sale" cssClass="form-check-input sale" value="1"/>
 				  <label class="form-check-label" for="flexRadioDefault1">
 				    판매
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input sale" type="radio" name="sale" id="flexRadioDefault2" value="0" checked>
+				  <!-- <input class="form-check-input sale" type="radio" name="sale" id="flexRadioDefault2" value="0" checked>  -->
+				  <form:radiobutton id="flexRadioDefault2" path="sale" cssClass="form-check-input sale" value="0"/>
 				  <label class="form-check-label" for="flexRadioDefault2">
 				    판매중지
 				  </label>
@@ -76,11 +92,14 @@
 			
 			</div>
 			
+			
 			<div class="row mt-3 mb-3 justify-content-between">
 				<button id="fileAdd" type="button" class="btn col-2 btn-secondary">FILE ADD</button>
-				<button id="add" class="btn col-2 btn-outline-primary">WRITE</button>
+				<button id="add2" type="submit" class="btn col-2 btn-outline-primary">WRITE</button>
 			</div>
-	</div>
+			</form:form>
+</div>
+			
 </body>
 <script type="text/javascript" src="../resources/js/fileAdd.js"></script>
 <script type="text/javascript" src="../js/summernote.js"></script>

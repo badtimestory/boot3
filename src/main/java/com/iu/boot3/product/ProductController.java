@@ -3,10 +3,12 @@ package com.iu.boot3.product;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,14 +61,18 @@ public class ProductController {
 	}
 	
 	@GetMapping("add")
-	public String setAdd() throws Exception {
+	public String setAdd(@ModelAttribute ProductVO productVO) throws Exception {
 		
 		return "product/add";
 	}
 	
 	@PostMapping("add")
-	public String setAdd(Model model, ProductVO productVO, MultipartFile[] files, 
-			HttpSession session) throws Exception {
+	public String setAdd(Model model, @Valid ProductVO productVO, BindingResult bindingResult, 
+			MultipartFile[] files, HttpSession session) throws Exception {
+		
+		if(bindingResult.hasErrors()) {
+			return "product/add";
+		}
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		productVO.setId(memberVO.getId());

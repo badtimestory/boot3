@@ -10,6 +10,9 @@ public interface MemberMapper {
 	// 회원가입
 	public int signUp(MemberVO memberVO) throws Exception;
 	
+	// 아이디 확인
+	public MemberVO getId(MemberVO memberVO) throws Exception;
+	
 	// 로그인
 	public MemberVO login(MemberVO memberVO) throws Exception;
 	

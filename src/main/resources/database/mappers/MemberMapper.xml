@@ -5,6 +5,11 @@
     
  <mapper namespace="com.iu.boot3.member.MemberMapper">
  	
+ 	<!-- id 조회 -->
+ 	<select id="getId" parameterType="MemberVO" resultType="MemberVO">
+ 		SELECT ID FROM MEMBER WHERE ID = #{id}
+ 	</select>
+ 	
  	<!-- 회원가입 Mapper -->
  	<insert id="signUp" parameterType="MemberVO">
  		INSERT INTO MEMBER (ID, PW, NAME, EMAIL, PHONE)

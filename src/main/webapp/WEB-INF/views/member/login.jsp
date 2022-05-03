@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,36 +13,43 @@
 </head>
 <body>
 
-<div class="container mt-4">
+	<div class="container mt-4">
 		<div class="row mt-4">
 			<div class="alert alert-secondary" role="alert">
 				  <h4>LOGIN</h4>
 			</div>
 		</div>
-		<form action="./login" method="POST" enctype="multipart/form-data">
-			<div class="row mb-3">
-			    <label class="col-sm-2 col-form-label">ID</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" name="id">
-			    </div>
-			</div>
-			
-			<div class="row mb-3">
-			    <label class="col-sm-2 col-form-label">PASSWORD</label>
-			    <div class="col-sm-10">
-			      <input type="password" class="form-control" name="pw">
-			    </div>
-			</div>
-			
-			<div class="row mt-3 d-grid gap-2 d-md-flex justify-content-end ">
-				<button class="btn col-1 btn-outline-primary">로그인</button>
-				<button id="find" type="button" class="btn col-2 btn-info">아이디 찾기</button>
-			</div>
-			
-			<div class="row mt-3 justify-content-end">
+			<!-- HTML Form tag 대신 Spring Form tag 사용 -->
+			<form:form modelAttribute="memberVO" method="POST">
+				<div class="row mb-3">
+				    <label class="col-sm-2 col-form-label">ID</label>
+				    <div class="col-sm-10">
+				      <!-- <input type="text" class="form-control" name="id"> -->
+				      <!-- cssClass : 일반적으로 css에서 사용하는 class -->
+				      <form:input path="id" id="id" cssClass="form-control"/>
+				    </div>
+				    <div>
+				    	<form:errors path="id"></form:errors>
+				    </div>
+				</div>
 				
-			</div>
-		</form>
+				<div class="row mb-3">
+				    <label class="col-sm-2 col-form-label">PASSWORD</label>
+				    <div class="col-sm-10">
+				    <!-- <input type="password" class="form-control" name="pw"> -->
+				    	<form:password path="pw" cssClass="form-control" name="pw"/>
+				    </div>
+				    <div>
+				    	<!-- cssStyle : css를 직접 지정 -->
+				    	<form:errors path="pw" cssStyle="color:red;"></form:errors>
+				    </div>
+				</div>
+				
+				<div class="row mt-3 d-grid gap-2 d-md-flex justify-content-end ">
+					<button type="submit" class="btn col-1 btn-outline-primary">로그인</button>
+					<button id="find" type="button" class="btn col-2 btn-outline-primary">아이디 찾기</button>
+				</div>
+			</form:form>
 	</div>
 
 <c:import url="../template/header_script.jsp"></c:import>
