@@ -19,6 +19,12 @@
 		<h1><spring:message code="product.detail.info" arguments="${vo.productPrice}, ${vo.productCount}" argumentSeparator=","></spring:message></h1>
 	</div>
 	
+	<div class="container">
+		<div class="row">
+			<button type="button" class="btn btn-danger">장바구니</button>
+		</div>
+	</div>
+	
 	<div class="container my-4">
 		<div class="col-2 d-flex">
 			<a href="update?productNum=${vo.productNum}" role="button" class="btn btn-success mx-1">Update</a>
