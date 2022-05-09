@@ -11,6 +11,8 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<c:import url="../template/header_script.jsp"></c:import>
+
 	<h1>${board} Detail Page</h1>
 	
 	<c:import url="./temp_detail.jsp"></c:import>
@@ -21,7 +23,7 @@
 	
 	<div class="container">
 		<div class="row">
-			<button type="button" class="btn btn-danger">장바구니</button>
+			<button type="button" id="cart" data-pn="${vo.productNum}" class="btn btn-danger">장바구니</button>
 		</div>
 	</div>
 	
@@ -32,6 +34,6 @@
 		</div>
 	</div>
 
-<c:import url="../template/header_script.jsp"></c:import>	
+<script type="text/javascript" src="../resources/js/cart.js"></script>
 </body>
 </html>

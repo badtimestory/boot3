@@ -11,6 +11,7 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import> 
+<c:import url="../template/header_script.jsp"></c:import>
 	<h1>${board} Detail Page</h1>
 
 	<div class="row">
@@ -42,12 +43,21 @@
 	    FILE : <a href="./fileDown?fileNum=${vo.memberFileVO.fileNum}">${vo.memberFileVO.oriName}</a>
 	  </div>
 	</div>
+	
+	<div class="container">
+		<div class="row">
+			<button id="btn" type="button" class="btn btn-danger">CartNum</button>
+		</div>
+	</div>
 		
 	<div class="d-grid gap-2 d-md-block">
 		<a href="./update" type="button" class="btn btn-success btn-sm">수정</a>
 		<a href="./delete" type="button" class="btn btn-danger btn-sm">탈퇴</a>
 	</div>
-	
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="../resources/js/cart.js"></script>
+<script type="text/javascript">
+	getList();
+</script>
 </body>
 </html>

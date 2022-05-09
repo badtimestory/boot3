@@ -26,9 +26,10 @@ public class ExceptionController {
 	}
 	
 	@ExceptionHandler(NullPointerException.class)
-	public ModelAndView ex2() {
+	public ModelAndView ex2(Exception e) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("Nullpointer 예외 발생");
+		e.printStackTrace();
 		return mv;
 	}
 	
